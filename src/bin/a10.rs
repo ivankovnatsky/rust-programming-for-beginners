@@ -12,4 +12,16 @@
 // * Use a match expression to determine which message
 //   to print
 
-fn main() {}
+fn print_compare(a: bool) {
+    match a {
+        true => println!("its big"),
+        false => println!("its small"),
+    }
+}
+
+fn main() {
+    let a = 99;
+    let its_big = if a > 100 { true } else { false };
+
+    print_compare(its_big);
+}

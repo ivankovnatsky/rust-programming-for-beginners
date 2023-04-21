@@ -12,4 +12,9 @@
 //   to uppercase and lowercase
 //   * Try searching for: to_uppercase, to_lowercase
 
-fn main() {}
+fn main() {
+    let s = "String defined to be printed in upper case and lower case later on";
+
+    println!("{:?}", s.to_uppercase());
+    println!("{:?}", s.to_lowercase());
+}

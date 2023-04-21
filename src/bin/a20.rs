@@ -23,4 +23,48 @@
 // * The program should be case-insensitive (the user should be able to type
 //   Reboot, reboot, REBOOT, etc.)
 
-fn main() {}
+use std::io;
+
+enum PowerState {
+    Off,
+    Sleep,
+    Reboot,
+    Shutdown,
+    Hibernate,
+}
+
+fn get_input() -> io::Result<String> {
+    let mut buffer = String::new();
+    io::stdin().read_line(&mut buffer)?;
+    Ok(buffer.trim().to_owned())
+}
+
+fn get_state(s: PowerState) {
+    match s {
+        PowerState::Off => println!("Computer will be shut off"),
+        PowerState::Sleep => println!("Computer will go sleep"),
+        PowerState::Reboot => println!("Computer will be rebooted"),
+        PowerState::Shutdown => println!("Computer will be shutdown"),
+        PowerState::Hibernate => println!("Computer will hibernate"),
+    }
+}
+
+fn main() {
+    let mut input_string = String::new();
+
+    match get_input() {
+        Ok(s) => input_string = s.to_lowercase(),
+        Err(e) => println!("The error occured: {:?}", e),
+    }
+
+    let power_state = match input_string.as_str() {
+        "off" => PowerState::Off,
+        "sleep" => PowerState::Sleep,
+        "reboot" => PowerState::Reboot,
+        "shutdown" => PowerState::Shutdown,
+        "hibernate" => PowerState::Hibernate,
+        _ => panic!("Unexpected power state: {}", input_string),
+    };
+
+    get_state(power_state);
+}

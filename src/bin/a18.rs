@@ -11,4 +11,23 @@
 // * Return a result from the function
 // * The Err variant should detail the reason why they cannot make a purchase
 
-fn main() {}
+struct Customer {
+    age: i32,
+}
+
+fn can_purchase(customer: &Customer) -> Result<(), String> {
+    if customer.age >= 21 {
+        Ok(())
+    } else {
+        Err("Customer can't be verified to allow this purchase".to_owned())
+    }
+}
+
+fn main() {
+    let customers = vec![Customer { age: 32 }, Customer { age: 18 }];
+
+    for i in customers {
+        let p = can_purchase(&i);
+        println!("{:?}", p)
+    }
+}
